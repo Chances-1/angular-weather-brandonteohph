@@ -1,0 +1,29 @@
+<div class="container">
+    <div class="title-container">
+        <h1>Temperature/Humidity Readings for {{ dateDisplay | date:'dd MMMM yyyy'}}</h1>
+    </div>
+    <div class="datepicker-container">
+        <div class="datepicker-input">
+            <mat-form-field>
+                <input matInput [matDatepicker]="picker" placeholder="Choose a date" (dateChange)="updateDateInput($event)">
+                <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                <mat-datepicker #picker></mat-datepicker>
+            </mat-form-field>
+            <button mat-button (click)="getWeatherData(dateInput.value)" >Submit!</button>
+        </div>
+    </div>
+    <div class="chart-container">
+        <div #chartTemperature class="chart-temperature"></div>
+        <div class="chart-empty"></div>
+        <div #chartHumidity class="chart-humidity"></div> 
+    </div> 
+    <div class="table-ag-grid">
+        <!-- for the table -->
+    
+        <ag-grid-angular
+            class="ag-theme-alpine" [rowData]="table_rowData" [columnDefs]="table_columnDefs" [defaultColDef]="table_defaultColDef" 
+            [enableCellChangeFlash]="true"
+            (gridReady)="onGridReady($event)">
+        </ag-grid-angular>
+    </div>
+</div>
